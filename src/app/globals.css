@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #070a16;
+  --bg-soft: #0b1024;
+  --card: rgba(255, 255, 255, 0.045);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --text: #e9ecff;
+  --muted: #9aa4c7;
+  --brand: #6366f1;
+  --brand-2: #22d3ee;
+  --good: #34d399;
+  --warn: #fbbf24;
+  --bad: #fb7185;
+}
+
+@theme inline {
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  background-image:
+    radial-gradient(900px 500px at 8% -5%, rgba(99, 102, 241, 0.22), transparent 60%),
+    radial-gradient(800px 480px at 92% 0%, rgba(34, 211, 238, 0.14), transparent 55%),
+    radial-gradient(700px 700px at 50% 120%, rgba(168, 85, 247, 0.12), transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.4);
+}
+
+@utility glass {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(14px);
+}
+
+@utility card-hover {
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(129, 140, 248, 0.45);
+  box-shadow: 0 18px 50px -22px rgba(99, 102, 241, 0.7);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes draw-ring {
+  from {
+    stroke-dashoffset: 1000;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease both;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  animation: shimmer 1.4s infinite;
+}
+
+.ring-animate circle.progress {
+  animation: draw-ring 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-plain {
+    background: #fff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+}
